@@ -33,7 +33,7 @@ download_imf <- function(source, start, end, freq, seriename){
   # sum of the vector elements
   x.number_rows <- sum(x.number_rows)
   # transform into dataframe
-  IMFData::head(CompactDataMethod(databaseID, queryfilter, startdate, enddate, checkquery,
+  head(IMFData::CompactDataMethod(databaseID, queryfilter, startdate, enddate, checkquery,
                                tidy = TRUE),x.number_rows) %>%
     select("@REF_AREA","@TIME_PERIOD","@OBS_VALUE") %>% # select country-id, time-id and value
     mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`)) # time series not numeric

@@ -17,7 +17,7 @@
 #'
 #' @export
 
-plot_summary.bygroup <- function(data, variable_to_summ, group, units, sum.stat = c("mean","median","sum","n"), na.rm = TRUE){
+plot_summary.bygroup <- function(data, variable_to_summ, group, n, sum.stat = c("mean","median","sum","n"), na.rm = TRUE){
 
   # Default categorical:
   sum.stat <- match.arg(sum.stat)
@@ -25,7 +25,7 @@ plot_summary.bygroup <- function(data, variable_to_summ, group, units, sum.stat 
   # Quosurize column variables for tidyeval:
   variable_quosure <- enquo(variable_to_summ)
   group_quosure <- enquo(group)
-  units_quosure <- enquo(units)
+  n_quosure <- enquo(n)
 
   # In alternative, if many parameters, we can quosurize as list with quos().
 
@@ -36,7 +36,7 @@ plot_summary.bygroup <- function(data, variable_to_summ, group, units, sum.stat 
     summarise(mean = mean(!!variable_quosure, na.rm = na.rm),
               median = median(!!variable_quosure, na.rm = na.rm),
               sum = sum(!!variable_quosure, na.rm = na.rm),
-              n = length(unique(!!units_quosure))
+              n = length(unique(!!n_quosure))
               )
 
     # Plot conditional:

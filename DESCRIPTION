@@ -1,0 +1,17 @@
+Package: umbcustom
+Type: Package
+Title: Custom functions. 
+Version: 0.1.0
+Author: Umberto Collodel
+Maintainer: Umberto Collodel <umberto.collodel@gmail.com>
+Description: Functions data science tasks: simplify data mining, cleaning and plotting.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+Import: 
+  tidyverse, 
+  IMFData, 
+  quantreg, 
+  jtools, 
+  mFilter
+RoxygenNote: 6.1.1

@@ -4,7 +4,7 @@ umbcustom is an R package that contains a set of custom defined functions for em
 
 ## Installation
 
-Instal and load the "devtools" package.
+Install and load the "devtools" package.
 Run the following command:
 
 ```

@@ -13,5 +13,9 @@ Import:
   IMFData, 
   quantreg, 
   jtools, 
-  mFilter
+  mFilter,
+  gridExtra,
+  grid,
+  stats,
+  DescTools
 RoxygenNote: 6.1.1

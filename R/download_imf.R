@@ -21,20 +21,30 @@ download_imf <- function(source, start, end, freq, seriename){
   # queryfilter
   queryfilter <- list(CL_FREA = freq, CL_AREA_IFS = "", CL_INDICATOR_IFS = c(seriename))
   # download
-  x <- IMFData::CompactDataMethod(databaseID, queryfilter, startdate, enddate,
+  data_list <- IMFData::CompactDataMethod(databaseID, queryfilter, startdate, enddate,
                          checkquery)
-  # calculate number rows
-  x.number_rows <- 0
-  for(i in 1:nrow(x)) {
-    x.number_rows[i] <- nrow(x$Obs[[i]])
-    print(x.number_rows[i])
+
+  # Need to count the number of rows for each dataframe of the list and sum
+  # the total.
+
+  number_rows <- data_list$Obs %>%
+           purrr::map_dbl(nrow) %>%
+           sum()
+
+  # Check unit of measurement difference: stops if there are countries with
+  # different units of measure.
+
+  if (data_list %>%
+        select("@UNIT_MULT") %>%
+        unique() %>%
+        length() != 1) {
+    stop("Different units of mesurement for countries.")
   }
-  print(i)
-  # sum of the vector elements
-  x.number_rows <- sum(x.number_rows)
-  # transform into dataframe
+
+  # Transform into dataframe.
+
   head(IMFData::CompactDataMethod(databaseID, queryfilter, startdate, enddate, checkquery,
-                               tidy = TRUE),x.number_rows) %>%
+                               tidy = TRUE), number_rows) %>%
     select("@REF_AREA","@TIME_PERIOD","@OBS_VALUE") %>% # select country-id, time-id and value
     mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`)) # time series not numeric
 }

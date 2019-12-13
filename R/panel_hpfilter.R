@@ -44,28 +44,19 @@ panel_hpfilter <- function(data, var, group, time, freq = 1600){
   # Want 'dataframe' to then rbind them together and join to the original
   # one.
 
-   # Create an empty list with the same length as original one and same names:
-  list_hpfilter.dataframes <- vector(mode = "list", length = length(list_hpfilter))
-  names(list_hpfilter.dataframes) <- names(list_hpfilter)
-
-  # Each element of the list is a dataframe with two columns: cycle and trend
-  # Start loop:
-  for (i in 1:length(list_hpfilter)) {
-   list_hpfilter.dataframes[[i]] <- data.frame(list_hpfilter[[i]][c("cycle","trend")])
-  }
-
-  # Convert each column of each element of the list to numeric and change trend name:
-  list_hpfilter.dataframes <- lapply(list_hpfilter.dataframes, function(x) x %>%
-           mutate_all(as.numeric) %>%
-           setNames(c("cycle","trend"))
-  )
+  list_hpfilter.dataframes <- list_hpfilter %>%
+                                    lapply(`[`,c("cycle", "trend")) %>%  # select cycle and trend
+                                    lapply(data.frame) %>%  # convert to dataframe
+                                    lapply(mutate_all, as.numeric) %>% # convert columns from ts to numeric
+                                    lapply(setNames, c("cycle","trend")) # setnames correctly
 
   # Row bind all dataframes (list elements) together:
   list_binded <- bind_rows(list_hpfilter.dataframes)
 
+  # Condition to check that new dataframe has same length than original one:
   if (length(list_binded$cycle) != length(data[[deparse(substitute(var))]])){
-    stop("Hp-filtered data are not the same length as original dataframe", length(list_binded$cycle), "vs",
-         count(data[[deparse(substitute(var))]]))
+    stop("Hp-filtered data are not the same length as original dataframe:", length(list_binded$cycle), " vs ",
+         length(data[[deparse(substitute(var))]]))
   }
 
   # Column bind with original dataframe:

@@ -23,9 +23,9 @@ plot_summary.bygroup <- function(data, variable_to_summ, group, n, sum.stat = c(
   sum.stat <- match.arg(sum.stat)
 
   # Quosurize column variables for tidyeval:
-  variable_quosure <- enquo(variable_to_summ)
-  group_quosure <- enquo(group)
-  n_quosure <- enquo(n)
+  variable_quosure <- rlang::enquo(variable_to_summ)
+  group_quosure <- rlang::enquo(group)
+  n_quosure <- rlang::enquo(n)
 
   # In alternative, if many parameters, we can quosurize as list with quos().
 

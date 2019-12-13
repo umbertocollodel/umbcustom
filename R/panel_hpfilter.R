@@ -29,7 +29,7 @@ panel_hpfilter <- function(data, var, group, time, freq = 1600){
   list_individual <- split(data, data[[deparse(substitute(group))]])
 
   # Quosurize the column to use in dplyr setting:
-  var_quosurize <- enquo(var)
+  var_quosurize <- rlang::enquo(var)
 
   # For each list, retrieve only the interested column, convert
   # to time series object (compatible) and apply the filter:
@@ -63,7 +63,7 @@ panel_hpfilter <- function(data, var, group, time, freq = 1600){
   # elements of list were in alphabetical order, need to arrange the original
   # dataframe in the same way.
 
-  group_quosurize <- enquo(group)
+  group_quosurize <- rlang::enquo(group)
 
   final_data <- data %>%
     arrange(!!group_quosurize) %>%
@@ -77,7 +77,7 @@ panel_hpfilter <- function(data, var, group, time, freq = 1600){
 
   # Plot:
   # quosurize to allow for general time-id.
-  time_quosurize <- enquo(time)
+  time_quosurize <- rlang::enquo(time)
 
   list_graphs <- lapply(list_graphs, function(x) x %>%
            ggplot(aes(!!time_quosurize, group = 1)) +

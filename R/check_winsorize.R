@@ -19,9 +19,9 @@ check_winsorize <- function (data, var, id, time, probs = c(0.05,0.95), na.rm = 
 
   # Quosurize variables required for tidy evaluation.
 
-  var_quosurize <- enquo(var)
-  id_quosurize <- enquo(id)
-  time_quosurize <- enquo(time)
+  var_quosurize <- rlang::enquo(var)
+  id_quosurize <- rlang::enquo(id)
+  time_quosurize <- rlang::enquo(time)
 
   # Boxplot variable of interest before and after outliers removal (winsorization).
   # Arrange them togheter.

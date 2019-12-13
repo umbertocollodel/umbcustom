@@ -1,6 +1,6 @@
 Package: umbcustom
 Type: Package
-Title: Custom functions. 
+Title: Custom functions 
 Version: 0.1.0
 Author: Umberto Collodel
 Maintainer: Umberto Collodel <umberto.collodel@gmail.com>
@@ -17,5 +17,6 @@ Import:
   gridExtra,
   grid,
   stats,
-  DescTools
+  DescTools,
+  rlang
 RoxygenNote: 6.1.1

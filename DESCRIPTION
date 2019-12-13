@@ -18,5 +18,6 @@ Import:
   grid,
   stats,
   DescTools,
-  rlang
+  rlang,
+  purrr
 RoxygenNote: 6.1.1

@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 .Rproj
+
+# Ignore data employed to develop functions
+
+.rda

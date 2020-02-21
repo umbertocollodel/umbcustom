@@ -4,7 +4,7 @@
 \alias{plot_summary.bygroup}
 \title{Plot cross sectional statistics in a panel.}
 \usage{
-plot_summary.bygroup(data, variable_to_summ, group, units,
+plot_summary.bygroup(data, variable_to_summ, group, n,
   sum.stat = c("mean", "median", "sum", "n"), na.rm = TRUE)
 }
 \arguments{
@@ -14,11 +14,11 @@ plot_summary.bygroup(data, variable_to_summ, group, units,
 
 \item{group}{Grouping variable, character or date vector.}
 
+\item{n}{Cross-sectional unit, character vector.}
+
 \item{sum.stat}{Summary statistic to plot, character. Default set to mean.}
 
 \item{na.rm}{Default TRUE.}
-
-\item{n}{Cross-sectional unit, character vector.}
 }
 \value{
 List with two elements: plot and dataframe with values.

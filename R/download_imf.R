@@ -28,8 +28,9 @@ download_imf <- function(source, start, end, freq, seriename){
   # the total.
 
   number_rows <- data_list$Obs %>%
-           purrr::map_dbl(nrow) %>%
-           sum()
+            purrr::map(~ .x[[1]])
+            purrr::map_dbl(nrow) %>%
+            sum()
 
   # Check unit of measurement difference: stops if there are countries with
   # different units of measure.
